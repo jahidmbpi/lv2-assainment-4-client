@@ -7,7 +7,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           <div>
             <img
-              className="w-[4rem]"
+              className="w-[4rem] rounded-lg"
               src="../../../../public/imagelogo.webp"
               alt=""
             />

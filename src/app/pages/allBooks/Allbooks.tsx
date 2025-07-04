@@ -37,7 +37,7 @@ export default function Allbooks() {
     return <Loader></Loader>;
   }
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 max-w-7xl mx-auto">
       {data?.map((book) => (
         <Card key={book._id} className="relative">
           <div className="h-[50%]">

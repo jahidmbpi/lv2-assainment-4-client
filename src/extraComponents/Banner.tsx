@@ -1,3 +1,6 @@
+"use client";
+
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
@@ -9,40 +12,34 @@ import {
 export default function Banner() {
   return (
     <div className="bg-[#f5f8fa] w-full h-[550px]">
-      <Carousel className="max-w-7xl mx-auto">
+      <Carousel
+        opts={{
+          loop: true,
+        }}
+        plugins={[Autoplay({ delay: 3000 })]} // autoplay added
+        className="max-w-7xl mx-auto"
+      >
         <CarouselContent>
           <CarouselItem>
-            <div>
-              <div>
-                <img
-                  className=" w-full h-[550px]"
-                  src="../../src/assets/thought-catalog-qkCTQFXidV8-unsplash.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
+            <img
+              className="w-full h-[550px] object-cover"
+              src="/assets/image1.jpg"
+              alt=""
+            />
           </CarouselItem>
           <CarouselItem>
-            <div>
-              <div>
-                <img
-                  className=" w-full h-[550px]"
-                  src="../../src/assets/florencia-viadana-DG6TzGH_1eY-unsplash.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
+            <img
+              className="w-full h-[550px] object-cover"
+              src="/assets/image3.jpg"
+              alt=""
+            />
           </CarouselItem>
           <CarouselItem>
-            <div>
-              <div>
-                <img
-                  className=" w-full h-[550px]"
-                  src="../../src/assets/thought-catalog-EzGm2wtyiC4-unsplash (1).jpg"
-                  alt=""
-                />
-              </div>
-            </div>
+            <img
+              className="w-full h-[550px] object-cover"
+              src="/assets/image4.jpg"
+              alt=""
+            />
           </CarouselItem>
         </CarouselContent>
         <CarouselPrevious />
