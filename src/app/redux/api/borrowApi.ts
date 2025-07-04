@@ -1,6 +1,12 @@
 import type { IBorrowedBookItem } from "@/borrow";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export interface Borrw {
+  bookId: string;
+  userId: string;
+  borrowDate: string;
+}
+
 // Define the API
 export const borrowApi = createApi({
   reducerPath: "borrowApi",
@@ -13,8 +19,16 @@ export const borrowApi = createApi({
         response.data,
       providesTags: ["borrow"],
     }),
+    createBorrow: builder.mutation<Borrw, Borrw>({
+      query: (data) => ({
+        url: "/borrow",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["borrow"],
+    }),
   }),
 });
 
-// Export the hook
-export const { useGetBorrowSummaryQuery } = borrowApi;
+// Export the hooks
+export const { useGetBorrowSummaryQuery, useCreateBorrowMutation } = borrowApi;
