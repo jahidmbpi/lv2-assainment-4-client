@@ -2,6 +2,7 @@ import { useGetSingleBookQuery } from "@/app/redux/api/booksApi";
 import { Button } from "@/components/ui/button";
 import { Link, useParams } from "react-router-dom";
 import { Modal } from "../borrowSummary/Modal";
+import Loader from "@/loader/Loader";
 
 export default function BookDetails() {
   const { id } = useParams();
@@ -13,7 +14,7 @@ export default function BookDetails() {
   console.log(isError);
 
   if (isLoading) {
-    return <p className="text-blue-500">Loading book details...</p>;
+    return <Loader></Loader>;
   }
 
   const {

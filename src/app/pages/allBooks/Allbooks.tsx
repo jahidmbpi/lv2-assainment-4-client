@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { GrView } from "react-icons/gr";
 import { Link } from "react-router";
 import { Modal } from "../borrowSummary/Modal";
+import Loader from "@/loader/Loader";
 
 export default function Allbooks() {
   const { data, isLoading, isError } = useGetAllBooksQuery();
@@ -19,7 +20,7 @@ export default function Allbooks() {
   ] = useDeleteBookMutation();
   console.log(isSuccess, isError, isDeleteLoading, isDeleteError);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader></Loader>;
   if (isError) return <p>Failed to load books</p>;
 
   console.log("Books data:", data);
@@ -32,7 +33,9 @@ export default function Allbooks() {
       console.log(error);
     }
   };
-
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
       {data?.map((book) => (

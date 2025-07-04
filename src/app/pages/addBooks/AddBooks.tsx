@@ -17,65 +17,76 @@ export default function AddBooks() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 border rounded shadow mt-8">
+    <div className="max-w-7xl mx-auto p-6 border rounded shadow mt-8">
       <h2 className="text-2xl font-bold mb-4 text-center">Add New Book</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <label className="block mb-1">Name</label>
-          <input
-            {...register("name", { required: true })}
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Enter book name"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Title</label>
-          <input
-            {...register("title", { required: true })}
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Enter book title"
-          />
-        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label className="block mb-1">Name</label>
+            <input
+              {...register("name", { required: true })}
+              className="w-full border px-3 py-2 rounded"
+              placeholder="Enter book name"
+            />
+          </div>
+          <div>
+            <label className="block mb-1">Title</label>
+            <input
+              {...register("title", { required: true })}
+              className="w-full border px-3 py-2 rounded"
+              placeholder="Enter book title"
+            />
+          </div>
 
-        <div>
-          <label className="block mb-1">Author</label>
-          <input
-            {...register("author", { required: true })}
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Author name"
-          />
-        </div>
+          <div>
+            <label className="block mb-1">Author</label>
+            <input
+              {...register("author", { required: true })}
+              className="w-full border px-3 py-2 rounded"
+              placeholder="Author name"
+            />
+          </div>
 
-        <div>
-          <label className="block mb-1">Genre</label>
-          <select
-            {...register("genre", { required: true })}
-            className="w-full border px-3 py-2 rounded"
-          >
-            <option value="">Select Genre</option>
-            <option value="SCIENCE">Science</option>
-            <option value="FICTION">Fiction</option>
-            <option value="BIOGRAPHY">Biography</option>
-            <option value="HISTORY">History</option>
-            <option value="NON_FICTION">NON_FICTION</option>
-            <option value="FANTASY">FANTASY</option>
-          </select>
-        </div>
-        <div>
-          <label className="block mb-1">image</label>
-          <input
-            {...register("image", { required: true })}
-            className="w-full border px-3 py-2 rounded"
-            placeholder="please provide book image "
-          />
-        </div>
+          <div>
+            <label className="block mb-1">Genre</label>
+            <select
+              {...register("genre", { required: true })}
+              className="w-full border px-3 py-2 rounded"
+            >
+              <option value="">Select Genre</option>
+              <option value="SCIENCE">Science</option>
+              <option value="FICTION">Fiction</option>
+              <option value="BIOGRAPHY">Biography</option>
+              <option value="HISTORY">History</option>
+              <option value="NON_FICTION">NON_FICTION</option>
+              <option value="FANTASY">FANTASY</option>
+            </select>
+          </div>
+          <div>
+            <label className="block mb-1">Image</label>
+            <input
+              {...register("image", { required: true })}
+              className="w-full border px-3 py-2 rounded"
+              placeholder="please provide book image "
+            />
+          </div>
 
+          <div>
+            <label className="block mb-1">Isbn</label>
+            <input
+              {...register("isbn", { required: true })}
+              className="w-full border px-3 py-2 rounded"
+              placeholder="ISBN Number"
+            />
+          </div>
+        </div>
         <div>
-          <label className="block mb-1">ISBN</label>
+          <label className="block mb-1">Copies</label>
           <input
-            {...register("isbn", { required: true })}
+            type="number"
+            {...register("copies", { required: true, min: 1 })}
             className="w-full border px-3 py-2 rounded"
-            placeholder="ISBN Number"
+            placeholder="Number of copies"
           />
         </div>
 
@@ -89,16 +100,6 @@ export default function AddBooks() {
           />
         </div>
 
-        <div>
-          <label className="block mb-1">Copies</label>
-          <input
-            type="number"
-            {...register("copies", { required: true, min: 1 })}
-            className="w-full border px-3 py-2 rounded"
-            placeholder="Number of copies"
-          />
-        </div>
-
         <div className="flex items-center gap-2">
           <input type="checkbox" {...register("available")} />
           <label>Available</label>
@@ -106,9 +107,9 @@ export default function AddBooks() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 capitalize"
         >
-          Submit
+          add new book
         </button>
       </form>
     </div>
