@@ -1,5 +1,5 @@
 "use client";
-
+import Swal from "sweetalert2";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -20,13 +20,15 @@ import {
 import { useCreateBorrowMutation } from "@/app/redux/api/borrowApi";
 import { useForm } from "react-hook-form";
 import DatePicker from "./DatePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { BorrowForm } from "@/borrow";
 
 export function Modal({ bookId }) {
   const [open, setOpen] = useState(false);
 
   console.log(bookId);
-  const [createBorrow] = useCreateBorrowMutation();
+  const [createBorrow, { isLoading, isError, isSuccess }] =
+    useCreateBorrowMutation();
 
   const form = useForm({
     defaultValues: {
@@ -35,13 +37,46 @@ export function Modal({ bookId }) {
     },
   });
 
-  const onSubmit = async (values) => {
-    console.log(values);
-    const borrowData = { bookId, ...values };
-    console.log(borrowData);
-    createBorrow(borrowData);
-    setOpen(false);
+  const onSubmit = async (values: BorrowForm) => {
+    console.log("Form Values:", values);
+
+    try {
+      const borrowData = {
+        book: bookId,
+        quantity: values.quantity,
+        dueDate: new Date(values.dueDate),
+      };
+
+      console.log("Payload to API:", borrowData);
+
+      await createBorrow(borrowData);
+      console.log(isLoading);
+      if (isLoading) {
+        return <p> loading</p>;
+      }
+
+      console.log(isSuccess);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      Swal.fire({
+        title: "Success!",
+        text: "Book borrowed successfully!",
+        icon: "success",
+      });
+    }
+    if (isError) {
+      Swal.fire({
+        title: "Opps!",
+        text: " somethingg went wrong!",
+        icon: "error",
+      });
+    }
+  }, [isSuccess, isError]);
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -75,18 +110,16 @@ export function Modal({ bookId }) {
             <FormField
               control={form.control}
               name="dueDate"
-              render={({ field }) => (
-                <DatePicker
-                  field={field}
-                  value={field.value}
-                  onChange={(e) => field.onChange(Number(e.target.value))}
-                />
-              )}
+              render={({ field }) => <DatePicker field={field} />}
             />
 
             <AlertDialogFooter>
               <AlertDialogCancel type="button">Cancel</AlertDialogCancel>
-              <Button type="submit" className="capitalize">
+              <Button
+                onClick={() => setOpen(false)}
+                type="submit"
+                className="capitalize"
+              >
                 Confirm borrow
               </Button>
             </AlertDialogFooter>

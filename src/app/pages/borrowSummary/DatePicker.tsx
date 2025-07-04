@@ -41,8 +41,11 @@ function DatePicker({ field }) {
             mode="single"
             selected={field.value}
             onSelect={(date) => {
-              field.onChange(date);
-              setOpen(false);
+              if (date) {
+                const formatted = date.toISOString().split("T")[0];
+                field.onChange(formatted);
+                setOpen(false);
+              }
             }}
             disabled={(date) =>
               date > new Date() || date < new Date("1900-01-01")

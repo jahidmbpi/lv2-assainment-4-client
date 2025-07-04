@@ -1,6 +1,7 @@
 import { useGetSingleBookQuery } from "@/app/redux/api/booksApi";
 import { Button } from "@/components/ui/button";
 import { Link, useParams } from "react-router-dom";
+import { Modal } from "../borrowSummary/Modal";
 
 export default function BookDetails() {
   const { id } = useParams();
@@ -66,7 +67,7 @@ export default function BookDetails() {
             </h2>
           </div>
           <div className="flex justify-between">
-            <Button className="bg-green-600 capitalize">borrow now</Button>
+            <Modal bookId={id} />
             <Button className="bg-blue-600 capitalize">
               {" "}
               <Link to="/">back home</Link>
