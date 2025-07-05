@@ -5,8 +5,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 export default function Banner() {
@@ -16,7 +14,7 @@ export default function Banner() {
         opts={{
           loop: true,
         }}
-        plugins={[Autoplay({ delay: 3000 })]} // autoplay added
+        plugins={[Autoplay({ delay: 3000 })]}
         className="max-w-7xl mx-auto"
       >
         <CarouselContent>
@@ -42,8 +40,6 @@ export default function Banner() {
             />
           </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
     </div>
   );
