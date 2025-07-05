@@ -10,7 +10,9 @@ export interface Borrw {
 // Define the API
 export const borrowApi = createApi({
   reducerPath: "borrowApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://lv2-assainment-3-1.onrender.com/api",
+  }),
   tagTypes: ["borrow"],
   endpoints: (builder) => ({
     getBorrowSummary: builder.query<IBorrowedBookItem[], void>({
