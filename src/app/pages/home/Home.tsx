@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <Banner></Banner>
-      <Header title="all book heare"></Header>
+      <Header></Header>
       <Allbooks></Allbooks>
     </div>
   );
