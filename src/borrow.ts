@@ -9,6 +9,7 @@ export interface IBorrowedBookItem {
   book: IBookSummary;
 }
 export type BorrowForm = {
+  bookId: string;
   quantity: number;
-  dueDate: string; // Format: "YYYY-MM-DD"
+  dueDate: string;
 };

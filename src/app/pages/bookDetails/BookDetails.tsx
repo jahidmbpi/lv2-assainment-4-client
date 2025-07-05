@@ -66,7 +66,8 @@ export default function BookDetails() {
             </h2>
           </div>
           <div className="flex justify-between">
-            <Modal bookId={id} />
+            {typeof id === "string" && <Modal bookId={id} />}
+
             <Button className="bg-blue-600 capitalize">
               {" "}
               <Link to="/">back home</Link>

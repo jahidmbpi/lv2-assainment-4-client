@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Popover,
   PopoverContent,
@@ -10,7 +11,12 @@ import {
 } from "@/components/ui/popover";
 import { FormControl, FormItem, FormLabel } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-function DatePicker({ field }) {
+
+interface DatePickerProps {
+  field: any;
+}
+
+function DatePicker({ field }: DatePickerProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -28,7 +34,7 @@ function DatePicker({ field }) {
               onClick={() => setOpen(true)}
             >
               {field.value ? (
-                format(field.value, "PPP")
+                format(new Date(field.value), "PPP")
               ) : (
                 <span>Pick a date</span>
               )}
@@ -39,7 +45,7 @@ function DatePicker({ field }) {
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
             mode="single"
-            selected={field.value}
+            selected={field.value ? new Date(field.value) : undefined}
             onSelect={(date) => {
               if (date) {
                 const formatted = date.toISOString().split("T")[0];
@@ -57,4 +63,5 @@ function DatePicker({ field }) {
     </FormItem>
   );
 }
+
 export default DatePicker;
