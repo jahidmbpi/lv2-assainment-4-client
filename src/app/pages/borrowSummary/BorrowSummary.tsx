@@ -23,38 +23,33 @@ export default function BorrowSummary() {
     return <Loader></Loader>;
   }
   return (
-    <div>
-      <div>
-        <div>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className=" ">book name</TableHead>
-                <TableHead className=" "> book title</TableHead>
-
-                <TableHead className=" ">book isbn</TableHead>
-                <TableHead className="  "> book quantity</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data?.map((book) => (
-                <TableRow key={book.book.isbn}>
-                  <TableCell>{book.book.name}</TableCell>
-                  <TableCell>{book.book.title}</TableCell>
-                  <TableCell>{book.book.isbn}</TableCell>
-                  <TableCell>{book.totalQuantity}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TableCell colSpan={3}>Total borow book</TableCell>
-                <TableCell className="">= {totalborrow}</TableCell>
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </div>
-      </div>
+    <div className="w-full overflow-x-auto rounded-lg border">
+      <Table className="min-w-[600px]">
+        <TableHeader>
+          <TableRow>
+            <TableHead>Book Name</TableHead>
+            <TableHead>Book Title</TableHead>
+            <TableHead>Book ISBN</TableHead>
+            <TableHead>Book Quantity</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data?.map((book) => (
+            <TableRow key={book.book.isbn}>
+              <TableCell>{book.book.name}</TableCell>
+              <TableCell>{book.book.title}</TableCell>
+              <TableCell>{book.book.isbn}</TableCell>
+              <TableCell>{book.totalQuantity}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={3}>Total Borrowed Book</TableCell>
+            <TableCell>= {totalborrow}</TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
     </div>
   );
 }
