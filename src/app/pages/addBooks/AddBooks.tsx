@@ -3,7 +3,7 @@ import type { IBook } from "@/book";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 export default function AddBooks() {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm<IBook>();
   const [addBooks, { isLoading, isSuccess, isError }] = useAddBooksMutation();
   console.log(isLoading, isSuccess, isError);
   const navigate = useNavigate();

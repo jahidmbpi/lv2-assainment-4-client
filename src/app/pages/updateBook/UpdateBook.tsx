@@ -2,22 +2,33 @@ import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "@/app/redux/api/booksApi";
+
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+
+interface UpdateBookFormData {
+  name: string;
+  image: string;
+  author: string;
+  title: string;
+  genre: string;
+  isbn: string;
+  description?: string;
+  copies: number;
+  available: boolean;
+}
 
 export default function UpdateBook() {
   const { id } = useParams();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<UpdateBookFormData>();
 
   const { data, isLoading, isError } = useGetSingleBookQuery(id as string);
   const [updateBook, { isSuccess, isError: isUpdateError }] =
     useUpdateBookMutation();
 
-  // ✅ Loading & Error Handling
   if (isLoading) return <p className="text-blue-500">Loading...</p>;
-  if (isError || !data?.data)
-    return <p className="text-red-500">Book not found.</p>;
+  if (isError || !data) return <p className="text-red-500">Book not found.</p>;
 
   const {
     name,
@@ -29,13 +40,17 @@ export default function UpdateBook() {
     description,
     copies,
     available,
-  } = data.data;
+  } = data;
 
-  const onSubmit = async (formData: any) => {
-    await updateBook({
-      id: id as string,
-      data: formData,
-    }).unwrap();
+  const onSubmit = async (formData: UpdateBookFormData) => {
+    try {
+      await updateBook({
+        id: id as string,
+        data: formData,
+      }).unwrap();
+    } catch (error) {
+      console.error("Update failed:", error);
+    }
   };
 
   return (
@@ -64,6 +79,16 @@ export default function UpdateBook() {
         </div>
 
         <div>
+          <label className="block mb-1">Image</label>
+          <input
+            {...register("image", { required: true })}
+            defaultValue={image}
+            className="w-full border px-3 py-2 rounded"
+            placeholder="Book image URL"
+          />
+        </div>
+
+        <div>
           <label className="block mb-1">Author</label>
           <input
             {...register("author", { required: true })}
@@ -84,6 +109,8 @@ export default function UpdateBook() {
             <option value="FICTION">Fiction</option>
             <option value="BIOGRAPHY">Biography</option>
             <option value="HISTORY">History</option>
+            <option value="FANTASY">Fantasy</option>
+            <option value="NON_FICTION">Non-Fiction</option>
           </select>
         </div>
 
@@ -136,10 +163,10 @@ export default function UpdateBook() {
         </button>
 
         {isSuccess && (
-          <p className="text-green-600 pt-2">✅ Book updated successfully!</p>
+          <p className="text-green-600 pt-2">Book updated successfully!</p>
         )}
         {isUpdateError && (
-          <p className="text-red-600 pt-2">❌ Failed to update book.</p>
+          <p className="text-red-600 pt-2"> Failed to update book.</p>
         )}
       </form>
     </div>

@@ -3,13 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Link, useParams } from "react-router-dom";
 import { Modal } from "../borrowSummary/Modal";
 import Loader from "@/loader/Loader";
+import type { IBook } from "@/book";
 
 export default function BookDetails() {
   const { id } = useParams();
-
   const { data, isLoading, isError } = useGetSingleBookQuery(id as string);
-  //   const [upadtedbook, { isError, isLoading, isSuccess }] =
-  //     useUpdateBookMutation();
   console.log(data);
   console.log(isError);
 
@@ -29,11 +27,11 @@ export default function BookDetails() {
     copies,
     updatedAt,
     createdAt,
-  } = data.data;
+  } = data as IBook;
   console.log(name, image, author, title, genre, isbn, description);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-6 max-w-7xl mx-auto lg:mt-[100px]">
       <div className="flex flex-col sm:flex-col md:flex-row gap-4">
         <div className="w-1/2">
           <img src={image} alt="" />

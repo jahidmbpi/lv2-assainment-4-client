@@ -2,7 +2,6 @@ import {
   useDeleteBookMutation,
   useGetAllBooksQuery,
 } from "@/app/redux/api/booksApi";
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
