@@ -21,20 +21,18 @@ import { useCreateBorrowMutation } from "@/app/redux/api/borrowApi";
 import { useForm } from "react-hook-form";
 import DatePicker from "./DatePicker";
 import { useEffect, useState } from "react";
-// No need to import BorrowForm since the form does not include bookId
-// import type { BorrowForm } from "@/borrow";
 
 type BorrowFormFields = {
   quantity: number;
   dueDate: string;
+  bookId: string;
 };
 
 export function Modal({ bookId }: { bookId: string }) {
   const [open, setOpen] = useState(false);
 
   console.log(bookId);
-  const [createBorrow, { isLoading, isError, isSuccess }] =
-    useCreateBorrowMutation();
+  const [createBorrow, { isError, isSuccess }] = useCreateBorrowMutation();
 
   const form = useForm<BorrowFormFields>({
     defaultValues: {
@@ -44,29 +42,30 @@ export function Modal({ bookId }: { bookId: string }) {
   });
 
   const onSubmit = async (values: BorrowFormFields) => {
-    console.log("Form Values:", values);
-
     try {
-      // You may need to get userId from context/auth, here it's set as a placeholder
       const borrowData = {
-        bookId: bookId,
-        userId: "currentUserId", // Replace with actual user id from auth/context
+        book: bookId,
         quantity: values.quantity,
-        dueDate: new Date(values.dueDate).toISOString(),
-        borrowDate: new Date().toISOString(), // Set borrowDate to now or as required
+        dueDate: values.dueDate,
       };
 
-      console.log("Payload to API:", borrowData);
+      const response = await createBorrow(borrowData).unwrap();
+      console.log("Borrowed:", response);
 
-      await createBorrow(borrowData);
-      console.log(isLoading);
-      if (isLoading) {
-        return <p> loading</p>;
-      }
+      setOpen(false);
 
-      console.log(isSuccess);
+      Swal.fire({
+        title: "Success!",
+        text: "Book borrowed successfully!",
+        icon: "success",
+      });
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
+      Swal.fire({
+        title: "Oops!",
+        text: "Something went wrong!",
+        icon: "error",
+      });
     }
   };
 

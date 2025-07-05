@@ -2,9 +2,9 @@ import type { IBorrowedBookItem } from "@/borrow";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Borrw {
-  bookId: string;
-  userId: string;
-  borrowDate: string;
+  book: string;
+  quantity: number;
+  dueDate: string;
 }
 
 // Define the API
