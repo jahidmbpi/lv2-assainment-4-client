@@ -15,13 +15,7 @@ export const bookApi = createApi({
         message: string;
         data: IBook[];
       }) => response.data,
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ _id }) => ({ type: "books" as const, id: _id })),
-              { type: "books", id: "LIST" },
-            ]
-          : [{ type: "books", id: "LIST" }],
+      providesTags: ["books"],
     }),
 
     addBooks: builder.mutation<IBook, Partial<IBook>>({
@@ -30,7 +24,7 @@ export const bookApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "books", id: "LIST" }],
+      invalidatesTags: ["books"],
     }),
 
     getSingleBook: builder.query<IBook, string>({
@@ -40,7 +34,6 @@ export const bookApi = createApi({
         message: string;
         data: IBook;
       }) => response.data,
-      providesTags: (_result, _error, id) => [{ type: "books", id }], // item-level
     }),
 
     updateBook: builder.mutation<
@@ -52,7 +45,7 @@ export const bookApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: "books", id }],
+      invalidatesTags: ["books"],
     }),
 
     deleteBook: builder.mutation<void, string>({
@@ -60,10 +53,7 @@ export const bookApi = createApi({
         url: `/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (_result, _error, id) => [
-        { type: "books", id },
-        { type: "books", id: "LIST" },
-      ],
+      invalidatesTags: ["books"],
     }),
   }),
 });

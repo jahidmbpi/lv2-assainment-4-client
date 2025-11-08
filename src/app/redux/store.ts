@@ -7,6 +7,7 @@ export const store = configureStore({
     [bookApi.reducerPath]: bookApi.reducer,
     [borrowApi.reducerPath]: borrowApi.reducer,
   },
+  devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(bookApi.middleware, borrowApi.middleware),
 });

@@ -48,7 +48,7 @@ function DatePicker({ field }: DatePickerProps) {
             selected={field.value ? new Date(field.value) : undefined}
             onSelect={(date) => {
               if (date) {
-                const formatted = date.toISOString().split("T")[0];
+                const formatted = date.toISOString();
                 field.onChange(formatted);
                 setOpen(false);
               }

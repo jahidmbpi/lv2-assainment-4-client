@@ -13,7 +13,7 @@ export const borrowApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://lv2-assainment-3-1.onrender.com/api",
   }),
-  tagTypes: ["borrow"],
+  tagTypes: ["books", "borrow"],
   endpoints: (builder) => ({
     getBorrowSummary: builder.query<IBorrowedBookItem[], void>({
       query: () => "/borrow",
@@ -27,10 +27,9 @@ export const borrowApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["borrow"],
+      invalidatesTags: ["books", "borrow"],
     }),
   }),
 });
 
-// Export the hooks
 export const { useGetBorrowSummaryQuery, useCreateBorrowMutation } = borrowApi;

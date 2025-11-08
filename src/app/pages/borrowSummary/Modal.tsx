@@ -21,6 +21,7 @@ import { useCreateBorrowMutation } from "@/app/redux/api/borrowApi";
 import { useForm } from "react-hook-form";
 import DatePicker from "./DatePicker";
 import { useEffect, useState } from "react";
+import { useGetAllBooksQuery } from "@/app/redux/api/booksApi";
 
 type BorrowFormFields = {
   quantity: number;
@@ -33,6 +34,7 @@ export function Modal({ bookId }: { bookId: string }) {
 
   console.log(bookId);
   const [createBorrow, { isError, isSuccess }] = useCreateBorrowMutation();
+  const { data, refetch } = useGetAllBooksQuery();
 
   const form = useForm<BorrowFormFields>({
     defaultValues: {
@@ -71,6 +73,7 @@ export function Modal({ bookId }: { bookId: string }) {
 
   useEffect(() => {
     if (isSuccess) {
+      refetch();
       Swal.fire({
         title: "Success!",
         text: "Book borrowed successfully!",
@@ -84,7 +87,8 @@ export function Modal({ bookId }: { bookId: string }) {
         icon: "error",
       });
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, refetch]);
+  console.log(data);
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>

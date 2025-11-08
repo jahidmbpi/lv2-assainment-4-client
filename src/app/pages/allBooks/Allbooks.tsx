@@ -27,7 +27,7 @@ export default function Allbooks() {
   const handelDelete = async (id: string) => {
     try {
       console.log(id);
-      await deleteBook(id);
+      await deleteBook(id).unwrap();
     } catch (error) {
       console.log(error);
     }
