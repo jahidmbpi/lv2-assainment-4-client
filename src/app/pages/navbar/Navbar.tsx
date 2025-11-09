@@ -32,7 +32,7 @@ export default function Navbar() {
           <div
             className={`${
               open ? "translate-x-0" : "-translate-x-full sm:translate-x-0"
-            } sm:static absolute top-20 left-0 sm:top-0 w-full sm:w-auto bg-gray-300/10 sm:bg-transparent transition-transform duration-300 sm:flex sm:translate-x-0 px-4`}
+            } sm:static absolute top-20 left-0 sm:top-0 w-full sm:w-auto bg-gray-500/50 sm:bg-transparent transition-transform duration-300 sm:flex sm:translate-x-0 px-4`}
           >
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 font-medium text-white py-4 sm:py-0">
               <Link to="/">All Books</Link>
