@@ -4,9 +4,9 @@ import { useNavigate } from "react-router";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookSchema, type BookFormData } from "./book.schema";
+import toast from "react-hot-toast";
 
 export default function AddBooks() {
-  // 🔹 Step 3: useForm setup with zodResolver
   const {
     register,
     handleSubmit,
@@ -23,6 +23,7 @@ export default function AddBooks() {
     try {
       const result = await addBooks(data).unwrap();
       console.log("Book Added:", result);
+      toast("create book success");
       reset();
       navigate("/");
     } catch (err) {
@@ -42,7 +43,7 @@ export default function AddBooks() {
             <label className="block mb-1">Name</label>
             <input
               {...register("name")}
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 rounded  "
               placeholder="Enter book name"
             />
             {errors.name && (

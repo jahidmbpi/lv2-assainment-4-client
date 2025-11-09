@@ -9,7 +9,7 @@ import {
 
 export default function Banner() {
   return (
-    <div className="bg-[#f5f8fa] w-full h-[550px]">
+    <div className="bg-[#f5f8fa] w-full h-[350px] md:h-[550px]">
       <Carousel
         opts={{
           loop: true,
@@ -20,21 +20,21 @@ export default function Banner() {
         <CarouselContent>
           <CarouselItem>
             <img
-              className="w-full h-[550px] object-cover"
+              className="w-full h-[350px] md:h-[550px] object-cover"
               src="/assets/image1.jpg"
               alt=""
             />
           </CarouselItem>
           <CarouselItem>
             <img
-              className="w-full h-[550px] object-cover"
+              className="w-full h-[350px] md:h-[550px] object-cover"
               src="/assets/image3.jpg"
               alt=""
             />
           </CarouselItem>
           <CarouselItem>
             <img
-              className="w-full h-[550px] object-cover"
+              className="w-full h-[350px] md:h-[550px] object-cover"
               src="/assets/image4.jpg"
               alt=""
             />
