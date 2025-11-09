@@ -93,7 +93,7 @@ export function Modal({ bookId }: { bookId: string }) {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button onClick={() => setOpen(true)} className="bg-green-600">
+        <Button onClick={() => setOpen(true)} className="bg-blue-600">
           Borrow
         </Button>
       </AlertDialogTrigger>
@@ -130,9 +130,9 @@ export function Modal({ bookId }: { bookId: string }) {
               <Button
                 onClick={() => setOpen(false)}
                 type="submit"
-                className="capitalize"
+                className="capitalize bg-blue-600"
               >
-                Confirm borrow
+                Confirm
               </Button>
             </AlertDialogFooter>
           </form>

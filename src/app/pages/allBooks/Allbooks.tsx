@@ -2,17 +2,20 @@ import {
   useDeleteBookMutation,
   useGetAllBooksQuery,
 } from "@/app/redux/api/booksApi";
-import { Button } from "@/components/ui/button";
+
 import { Card } from "@/components/ui/card";
 
 import { GrView } from "react-icons/gr";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Modal } from "../borrowSummary/Modal";
 import Loader from "@/loader/Loader";
+import "./book.css";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
 
 export default function Allbooks() {
   const { data, isLoading, isError } = useGetAllBooksQuery();
-
+  const navigate = useNavigate();
   const [
     deleteBook,
     { isSuccess, isError: isDeleteError, isLoading: isDeleteLoading },
@@ -38,17 +41,22 @@ export default function Allbooks() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 max-w-7xl mx-auto">
       {data?.map((book) => (
-        <Card key={book._id} className="relative">
-          <div className="h-[50%]">
-            <img src={book.image} alt="" />
+        <Card key={book._id} className="relative group">
+          <div className="h-[60%]">
+            <img src={book.image} alt="" className="rounded-lg" />
           </div>
 
-          <div className="flex flex-col mt-4 space-y-2">
-            <h2> Name:{book.name}</h2>
+          <div className="flex flex-col  space-y-1">
+            <h2 className="text text-[20px] font-light  font-sans">
+              {" "}
+              Name:{book.name}
+            </h2>
 
             <div className="flex justify-between ">
-              <h2>type:{book.genre}</h2>
-              <p>isbn:{book.isbn}</p>
+              <h2 className="text-[16px] font-sans font-normal">
+                Type:{book.genre}
+              </h2>
+              <p className="font-sans">Isbn:{book.isbn}</p>
             </div>
             <div className="flex justify-between">
               <h2
@@ -57,30 +65,30 @@ export default function Allbooks() {
                 {book.available ? "Available" : "Not Available"}
               </h2>
 
-              <p>copys:{book.copies}</p>
+              <p className="font-[18px] font-sans">copys:{book.copies}</p>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <Modal bookId={book._id} />
-              <Button className="bg-blue-600">
-                <Link to={`/updateBook/${book._id}`}>update</Link>
-              </Button>
-
-              <Button
-                onClick={() => handelDelete(book._id)}
-                className="bg-red-500"
-              >
-                delete
-              </Button>
+              <Link to={`/details/${book._id}`}>
+                <GrView size={20} className="text-2xl text-gray-500" />
+              </Link>
             </div>
           </div>
 
-          <div className="absolute z-10 right-4 top-4">
-            <Link to={`/details/${book._id}`}>
-              <div className="flex gap-2">
-                <h2 className="text-white"> view</h2>
-                <GrView className="text-2xl text-white" />
-              </div>
-            </Link>
+          <div className="absolute z-10 right-4 top-4 hidden group-hover:block">
+            <div className=" flex gap-4">
+              <FaRegEdit
+                className="text-gray-500"
+                size={24}
+                onClick={() => navigate(`/updateBook/${book._id}`)}
+              />
+
+              <RiDeleteBin6Line
+                size={24}
+                className="text-gray-500"
+                onClick={() => handelDelete(book._id)}
+              />
+            </div>
           </div>
         </Card>
       ))}
