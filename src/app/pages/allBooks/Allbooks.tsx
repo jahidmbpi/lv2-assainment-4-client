@@ -78,14 +78,14 @@ export default function Allbooks() {
           <div className="absolute z-10 right-4 top-4 hidden group-hover:block">
             <div className=" flex gap-4">
               <FaRegEdit
-                className="text-gray-500"
+                className="text-white"
                 size={24}
                 onClick={() => navigate(`/updateBook/${book._id}`)}
               />
 
               <RiDeleteBin6Line
                 size={24}
-                className="text-gray-500"
+                className="text-white"
                 onClick={() => handelDelete(book._id)}
               />
             </div>

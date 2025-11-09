@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Modal } from "../borrowSummary/Modal";
 import Loader from "@/loader/Loader";
 import type { IBook } from "@/book";
+import { FiHome } from "react-icons/fi";
 
 export default function BookDetails() {
   const { id } = useParams();
@@ -31,10 +32,10 @@ export default function BookDetails() {
   console.log(name, image, author, title, genre, isbn, description);
 
   return (
-    <div className="p-6 max-w-7xl mx-auto lg:mt-[100px]">
-      <div className="flex flex-col sm:flex-col md:flex-row gap-4">
-        <div className="w-1/2">
-          <img src={image} alt="" />
+    <div className="p-6 max-w-7xl mx-auto lg:mt-[100px] h-screen items-center justify-center flex">
+      <div className="flex flex-col sm:flex-col md:flex-row gap-4 items-center">
+        <div className="w-full">
+          <img src={image} alt="" className="rounded-lg" />
         </div>
         <div className="flex flex-col space-y-4">
           <div>
@@ -70,7 +71,9 @@ export default function BookDetails() {
 
             <Button className="bg-blue-600 capitalize">
               {" "}
-              <Link to="/">back home</Link>
+              <Link to="/" className="flex gap-2">
+                <FiHome /> home
+              </Link>
             </Button>
           </div>
         </div>
